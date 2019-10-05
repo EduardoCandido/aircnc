@@ -25,10 +25,15 @@ module.exports = {
         price
         });
 
-        console.log('terminou');
         return res.json(spot);
         
 
         
+    },
+
+    async destroy(req, res){
+        const {spot_id} = req.params;
+
+        const spot = await Spot.deleteOne({_id: spot_id});
     }
 }

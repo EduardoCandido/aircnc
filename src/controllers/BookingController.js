@@ -7,12 +7,14 @@ module.exports = {
         const { spot_id } = req.params;
         const { date } = req.body;
 
-        const booking = Booking.create({
+        const booking = await Booking.create({
             user: user_id,
             spot: spot_id,
             date
         });
 
-        return res.json( booking );
+        await booking.populate('spot').populate('user').execPopulate();
+
+        return res.json(booking);
     }
 }
